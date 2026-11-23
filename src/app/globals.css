@@ -3,8 +3,8 @@
 /*
  * FinTrack design tokens: dark navy surfaces + violet accent (fintech look).
  * Contrast (WCAG AA) measured against --surface (#0f182b) / --background (#0a1020):
- *   foreground 15:1, muted ~7:1, subtle ~5:1, accent (#a78bfa) ~6.6:1,
- *   income (#2dd4bf) ~9:1, expense (#f472b6) ~6.5:1, primary-strong w/ white text ~5.2:1.
+ *   foreground 15:1, muted ~7:1, subtle ~5:1, accent (#a78bfa) ~6.5:1,
+ *   income (#2dd4bf) ~9:1, expense (#f472b6) ~6.7:1, primary-strong w/ white text ~5.2:1.
  */
 :root {
   color-scheme: dark;

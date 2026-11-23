@@ -25,15 +25,19 @@ test("register(or login) -> category -> transaction -> budget -> dashboard -> lo
 
   await page.goto("/categories");
   await page.getByRole("button", { name: /Nueva categoría/ }).click();
-  await page.getByLabel("Nombre").fill(catName);
-  await page.getByRole("button", { name: "Guardar" }).click();
+  const catDialog = page.getByRole("dialog");
+  await catDialog.getByLabel("Nombre", { exact: true }).fill(catName);
+  await catDialog.getByRole("button", { name: "Guardar", exact: true }).click();
+  await expect(catDialog).toBeHidden();
   await expect(page.getByText(catName)).toBeVisible();
 
   await page.goto("/transactions");
   await page.getByRole("button", { name: /Nueva transacción/ }).click();
-  await page.getByLabel("Categoría").selectOption({ label: catName });
-  await page.getByLabel("Monto").fill("10,50");
-  await page.getByRole("button", { name: "Guardar" }).click();
+  const txDialog = page.getByRole("dialog");
+  await txDialog.getByLabel("Categoría", { exact: true }).selectOption({ label: catName });
+  await txDialog.getByLabel("Monto", { exact: true }).fill("10,50");
+  await txDialog.getByRole("button", { name: "Guardar", exact: true }).click();
+  await expect(txDialog).toBeHidden();
   await expect(page.getByText(/10[.,]50/).first()).toBeVisible();
 
   await page.goto("/budgets");
@@ -42,6 +46,7 @@ test("register(or login) -> category -> transaction -> budget -> dashboard -> lo
   await page.goto("/dashboard");
   await expect(page.getByRole("heading", { name: /Dashboard|Resumen/ })).toBeVisible();
 
+  // Desktop viewport: the sidebar "Cerrar sesión" button is visible (the top-bar user menu has a second one inside a menu).
   await page.getByRole("button", { name: /Cerrar sesión/ }).first().click();
   await expect(page).toHaveURL(/\/login/);
   await page.goto("/dashboard");

@@ -23,12 +23,14 @@ export function HeroGreeting({
     >
       <div aria-hidden="true" className="pointer-events-none absolute -bottom-20 -right-10 size-72 rounded-full bg-primary/30 blur-3xl" />
       <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 right-40 size-56 rounded-full bg-info/20 blur-3xl" />
-      <div className="relative max-w-xl">
+      <div className="relative min-w-0 max-w-xl">
         <p className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-accent">
           <Sparkles className="size-3.5" aria-hidden="true" />
           {monthLabel}
         </p>
-        <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground">Hola, {firstName}</h2>
+        <h2 className="mt-4 min-w-0 break-words text-3xl font-bold tracking-tight text-foreground">
+          {firstName.trim() ? `Hola, ${firstName}` : "Hola"}
+        </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
           {empty
             ? "Todavía no registras movimientos este mes. Agrega tu primera transacción para ver tu resumen."

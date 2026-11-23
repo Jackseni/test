@@ -47,7 +47,7 @@ export function SubmitButton({ pending, children }: { pending: boolean; children
     <button
       type="submit"
       disabled={pending}
-      className="w-full rounded-full bg-primary-strong px-4 py-2.5 font-semibold text-white shadow-[0_6px_20px_-6px_rgba(124,92,255,0.7)] transition hover:bg-primary focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60"
+      className="w-full rounded-full bg-primary-strong px-4 py-2.5 font-semibold text-white shadow-[0_6px_20px_-6px_rgba(124,92,255,0.7)] transition hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60"
     >
       {children}
     </button>

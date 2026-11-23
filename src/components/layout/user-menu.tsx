@@ -52,7 +52,7 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
       >
         <span
           aria-hidden="true"
-          className="grid size-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary-strong to-info text-xs font-bold text-white"
+          className="grid size-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary-strong to-[#4338ca] text-xs font-bold text-white"
         >
           {initialsOf(name)}
         </span>

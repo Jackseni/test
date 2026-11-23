@@ -42,11 +42,28 @@ describe("T6R WCAG contrast of design tokens", () => {
   it("white on primary-strong >= 4.5:1 (auth submit button, avatar gradient start)", () => {
     expect(ratio([255, 255, 255], T("primary-strong"))).toBeGreaterThanOrEqual(4.5);
   });
-  it.fails("KNOWN LOW: white on primary (hover state of submit button) >= 4.5:1", () => {
-    expect(ratio([255, 255, 255], T("primary"))).toBeGreaterThanOrEqual(4.5);
+  const darken = ([r, g, b]: RGB, f: number): RGB => [r, g, b].map((c) => Math.round(c * f)) as RGB;
+  const WHITE: RGB = [255, 255, 255];
+  it("white on primary-strong hover (CSS brightness-90 => channels * 0.9) >= 4.5:1", () => {
+    const r = ratio(WHITE, darken(T("primary-strong"), 0.9));
+    console.info("T6R white on hovered primary-strong", r.toFixed(2));
+    expect(r).toBeGreaterThanOrEqual(4.5);
   });
-  it.fails("KNOWN LOW: white on info (avatar gradient end) >= 4.5:1", () => {
-    expect(ratio([255, 255, 255], T("info"))).toBeGreaterThanOrEqual(4.5);
+  it("UI really uses bg-primary-strong + hover:brightness-90 in button and auth submit", () => {
+    for (const f of ["src/components/ui/button.tsx", "src/components/auth/auth-ui.tsx"]) {
+      const src = readFileSync(resolve(__dirname, "../../", f), "utf8");
+      expect(src, f).toContain("bg-primary-strong");
+      expect(src, f).toContain("hover:brightness-90");
+    }
+  });
+  it("avatar gradient endpoints (primary-strong -> #4338ca) with white text >= 4.5:1", () => {
+    const src = readFileSync(resolve(__dirname, "../../src/components/layout/user-menu.tsx"), "utf8");
+    expect(src).toContain("from-primary-strong to-[#4338ca]");
+    const r1 = ratio(WHITE, T("primary-strong"));
+    const r2 = ratio(WHITE, hex("#4338ca"));
+    console.info("T6R avatar white vs start/end", r1.toFixed(2), r2.toFixed(2));
+    expect(r1).toBeGreaterThanOrEqual(4.5);
+    expect(r2).toBeGreaterThanOrEqual(4.5);
   });
   for (const bg of surfaces) {
     it(`focus ring (accent) vs ${bg} >= 3:1`, () => {

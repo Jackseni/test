@@ -61,8 +61,7 @@ describe("T6R display-name", () => {
     expect(firstName("Ana P\u00e9rez")).toBe("Ana");
     expect(firstName("ana@example.com")).toBe("ana");
   });
-  // DEFECT (LOW): initials slice UTF-16 code units, so a leading emoji in a multi-word name yields a lone surrogate.
-  it.fails("initials never contain lone surrogates (emoji first word)", () => {
+  it("initials never contain lone surrogates (emoji first word)", () => {
     const out = initialsOf("\u{1F600} Ana");
     expect(/[\uD800-\uDFFF]/.test(out.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, ""))).toBe(false);
   });
