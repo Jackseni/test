@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/*
+ * FinTrack design tokens: dark navy surfaces + violet accent (fintech look).
+ * Contrast (WCAG AA) measured against --surface (#0f182b) / --background (#0a1020):
+ *   foreground 15:1, muted ~7:1, subtle ~5:1, accent (#a78bfa) ~6.6:1,
+ *   income (#2dd4bf) ~9:1, expense (#f472b6) ~6.5:1, primary-strong w/ white text ~5.2:1.
+ */
+:root {
+  color-scheme: dark;
+  --background: #0a1020;
+  --foreground: #e8ecf6;
+  --surface: #0f182b;
+  --surface-2: #162240;
+  --line: rgba(255, 255, 255, 0.09);
+  --muted: #9aa6c0;
+  --subtle: #8390ad;
+  --primary: #7c5cff;
+  --primary-strong: #6d4cf5;
+  --accent: #a78bfa;
+  --income: #2dd4bf;
+  --expense: #f472b6;
+  --warn: #facc15;
+  --info: #6366f1;
+  --danger: #fb7185;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-accent: var(--accent);
+  --color-income: var(--income);
+  --color-expense: var(--expense);
+  --color-warn: var(--warn);
+  --color-info: var(--info);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(900px 500px at 85% -10%, rgba(124, 92, 255, 0.14), transparent 60%),
+    radial-gradient(700px 400px at -5% 100%, rgba(45, 212, 191, 0.06), transparent 60%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(124, 92, 255, 0.45);
+}
+
+/* Native controls on dark surfaces. */
+select option {
+  background-color: #0f182b;
+  color: #e8ecf6;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+}
+
+/* Subtle, optional motion only. */
+@keyframes ft-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.ft-fade-in {
+  animation: ft-fade-in 0.3s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

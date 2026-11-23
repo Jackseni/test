@@ -1,0 +1,15 @@
+-- DEVELOPMENT ONLY. Never run against production.
+-- Applied automatically by `supabase db reset` (local). Do NOT paste into a
+-- production SQL editor. Default categories are created per user by the
+-- on_auth_user_created trigger, so this file intentionally inserts no users
+-- (auth users must be created via the Auth API / signup form).
+--
+-- Optional: after signing up a local dev user, uncomment and replace the email
+-- to add a sample transaction.
+--
+-- insert into public.transactions (user_id, category_id, type, amount, description, transaction_date)
+-- select u.id, c.id, c.type, 1500.00, 'Ejemplo (dev)', current_date
+-- from auth.users u
+-- join public.categories c on c.user_id = u.id and c.name = 'Salario' and c.type = 'INCOME'
+-- where u.email = 'dev@example.com';
+select 1;
